@@ -16,8 +16,10 @@ This repository is a template for academic writing based on plain text and autom
     - [Referencing](#referencing)
     - [Cross-referencing](#cross-referencing)
     - [Navigating](#navigating)
-    - [Publishing](#publishing)
     - [Typesetting](#typesetting)
+      - [Document class](#document-class)
+      - [Customization](#customization)
+    - [Exporting](#exporting)
     - [Note-taking with Foam](#note-taking-with-foam)
     - [Version control with Git](#version-control-with-git)
     - [Sync and backup](#sync-and-backup)
@@ -63,15 +65,15 @@ Clone this repository and produce a sample PDF in just a few steps:
 
    - Thesis:
      ```bash
-     sh export-thesis.sh
+     sh export-document.sh examples/thesis
      ```
    - Article:
      ```bash
-     sh export-article.sh
+     sh export-document.sh examples/article.md
      ```
    - Slides:
      ```bash
-     sh export-slides.sh
+     sh export-slides.sh examples/slides.md
      ```
 
    All PDFs will appear in the `exports/` folder.
@@ -150,13 +152,13 @@ This setup relies on [Zotero](https://www.zotero.org/), a full-fledged and open-
 
 For our system to work, **we need the `refs.bib` file to stay synchronized with our Zotero collection**. For that we will use a Zotero extension called Better BibTeX.
 
-- Follow the [installation instructions fro Better BibTex](https://retorque.re/zotero-better-bibtex/installation/).
+- Follow the [installation instructions for Better BibTex](https://retorque.re/zotero-better-bibtex/installation/).
 
 - Next, you have to tell Better BibTeX to synchronize your collection with the `refs.bib` file in this project. Say you have a `research` or `thesis` folder in Zotero, where you collect all material relevant to your dissertation. Follow the instructions for [automatic export](https://retorque.re/zotero-better-bibtex/exporting/auto/):
 
   > ... right-click on it in the left Zotero pane and choose "Export Library…" or "Export Collection...". With Better BibTeX's export translators (e.g., "Better BibTeX"), checking the Keep updated option will register the export for automation.
 
-- To **quickly find references from our text editor**, we will type in **Citation Keys** (as we will see in [Referencing](#referencing)). Citation Keys are unique identifiers automatically given to each item in your Zotero collection. In the Better BibTeX settings, enter your preferred citation key formula. I use: `authEtAl+origyear+":"+shorttitle(3,3)+postfix("-%(n)s")`. That way, Alfred Chandler's 1962 book *Strategy and Structure: Chapters in the History of the Industrial Enterprise* will have `Chandler1962:StrategyStructureChapters`as a citation key.
+- To **quickly find references from our text editor**, we will type in **Citation Keys** (as we will see in [Referencing](#referencing)). Citation Keys are unique identifiers automatically given to each item by Better BibTeX. In the Better BibTeX settings, enter your preferred citation key formula. I use: `authEtAl+origyear+":"+shorttitle(3,3)+postfix("-%(n)s")`. That way, Alfred Chandler's 1962 book *Strategy and Structure: Chapters in the History of the Industrial Enterprise* will have `Chandler1962:StrategyStructureChapters`as a citation key.
 
 Another useful extension is a [connector for your browser](https://www.zotero.org/download/connectors) to **add items into your Zotero collector directly from the internet**.
 
@@ -178,7 +180,7 @@ I also recommend installing **extensions for comfortably writing Markdown**, lik
 
 Git is a versioning tool. It allows you to **document every step of the writing processes, go back in time to a previous version of a document**, and much more. Git should be installed on your machine by default. You can check this by typing `git --version` in the Terminal.app on macOS. Otherwise, follow the [intallation instructions](https://git-scm.com/downloads/mac).
 
-Git is not necessary for the setup to work, and requires some getting used to. I've found that using Git to document every step of the work has made me more consistent and focused. There are plenty of resources online to learn Git from; even [a game](https://ohmygit.org/)!
+Git is not necessary for the setup to work, and requires some getting used to. I've found that using Git to document every step of the work has made me more consistent and focused. See below for a [minimal usage guide](#version-control-with-git).
 
 ## Usage guide
 
@@ -186,10 +188,10 @@ This section walks through the essentials of working with this template:
 
 * [Writing](#writing) in Markdown, explained by example
 * [Referencing](#referencing) and [cross-referencing](#cross-referencing)
-* Using VS Code tools for [navigation](#navigating) and building a knowledge base for [research](#researching).
-* [Publishing](#publishing) outputs, from simple notes and slides to a full thesis.
-* [Typesetting](#typesetting) the outputs for customization
-* Managing your project with [version control](#version-control), extending the workflow with [useful extensions](#useful-extensions), and setting up [sync and backup](#sync-and-backup) to protect your work.
+* Using VS Code tools for [navigation](#navigating) and building a knowledge base for [research](#researching)
+* [Typesetting](#typesetting) the documents for customization
+* [Exporting](#exporting) outputs, from simple notes and slides to a full thesis.
+* Managing your project with [version control](#version-control) and setting up [sync and backup](#sync-and-backup) to protect your work
 
 ### Writing 
 
@@ -202,21 +204,19 @@ The specific flavor of Markdown used is [Pandoc Markdown](https://pandoc.org/MAN
 - Footnotes
 - Examples of [referencing](#referencing) and [typesetting](#typesetting) discussed below.
 
-You can view the formatted Markdown in VS Code with the command `Markdown: Open Preview`, or export it as PDF with:
-
-```bash
-sh export-article.sh
-```
+You can view the formatted Markdown by exporting it as PDF with the command from the [Quickstart](#quickstart) section. (You can also preview the file in VS Code with the command `Markdown: Open Preview`, although some advanced feature of the setup won't work.)
 
 ### Referencing
 
-To **reference**, simply type `@` and part of a citation key you are looking for and select it in the drop-down.
+To **reference**, simply type `@` and part of a `@citationKey` you are looking for and select it in the drop-down.
 
 <!-- GIF -->
 
-The `Pandoc Citer` VS Code extension will provide autocomplete based on the contents of the `refs.bib` file, which is automatically updated by Zotero's `Better Bibtex` extension.
+The `Pandoc Citer` VS Code extension will provide autocomplete based on the contents of the `refs.bib` file, which is automatically updated by Zotero's `Better BibTex` extension.
 
-The output of references is determined by the Citation Style Language (CSL) citation style at the root of the project. The style included in this repository is the Chicago Manual of Style 17th edition (author-date), but you can choose [another CSL style](https://github.com/citation-style-language/styles?tab=readme-ov-file).
+The output of references is determined by the Citation Style Language (CSL) citation style at the root of the project. The style included in this repository is the [Chicago Manual of Style 17th edition (author-date)](./citation-style-CMS17.csl), but you can choose [another CSL style](https://github.com/citation-style-language/styles?tab=readme-ov-file).
+
+The formatting options for citations cover many situations:
 
 | Markdown input                             | Output (CMS17)                    |
 | ------------------------------------------ | --------------------------------- |
@@ -247,7 +247,7 @@ Cross-referencing means creating links inside your own document, as when pointin
    see Figure~\ref{fig:my-diagram}
    ```
 
-Pandoc + TeX will replace the label with the correct number, keeping everything updated automatically if you add, remove, or reorder content. See <!-- file --> for a working example.
+Pandoc + TeX will replace the label with the correct number, keeping everything updated automatically if you add, remove, or reorder content. See [`examples/article.md`](examples/article.md) for a working example.
 
 ### Navigating
 
@@ -278,9 +278,64 @@ VS Code offers plenty of built-in navigation tools which become increasingly us
 - `option+Shift+A` comments out the selected text or inserts an inline comment if no text is selected
 - `Cmd+Shift+A` comments out the paragraph where the cursor is located or inserts a comment as a paragraph
 
-### Publishing
+### Typesetting
 
-### Typesetting  
+When you pass Markdown file to Pandoc, it translates it into LaTeX before producing a PDF. To format the document, Pandoc first applies **the `documentclass`**, then applies any extra typesetting instructions with **specified custom parameters**.
+
+#### Document class
+
+- **Article class**: If you don't specify a `documentclass`, Pandoc will use the `article` LaTeX class. This is the case in [`examples/article.md`](./examples/article.md).
+
+- **Memoir class** is an alternative to the `book` class for long documents. See [`examples/thesis/`](./examples/thesis/) for a working configuration.
+
+- **Beamer class** is used to produce slides. Rather than being specified in [`examples/slides.md`](./examples/slides.md), the class is applied in the [`export-slides.sh`](./export-slides.sh) script.
+
+#### Customization
+
+Any extra typesetting arguments we pass to Pandoc will overwrite the corresponding parameters in the chosen document class in the following ways:
+
+- Either as parameters in the **front matter**, a section at the beginning of Markdown documents formatted in [YAML](https://yaml.org/)
+
+  - The YAML front matter may contain the title, author and date metadata; an abstract; LaTeX packages (`\usepackage{...}`); page geometry, margins, line spacing; and custom commands (`\newcommand{}`).
+  - See the beginning of [`examples/article.md`](./examples/article.md) for an example with the `article` class.
+  - See the thesis example and consult the [Memoir manual](https://ctan.org/pkg/memoir) for further customization of the Memoir class.
+
+- And/or as **LaTeX commands** in the body of the Markdown document (see [`examples/thesis/0_frontmatter.md`](./examples/thesis/0_frontmatter.md) for an example)
+
+- **For slides**, you can customize look and feel in `beamer-template.tex` and `beamer-style.tex`.
+
+Finally, the **back matter** is where Pandoc inserts automatically generated content at the end of your thesis: References (from `refs.bib` + CSL style), List of figures, List of tables, Table of Contents… See the examples for a working configuration.
+
+### Exporting
+
+Pandoc takes your Markdown, applies layout from the **front matter** (extra metadata and LaTeX settings at the top of your document, see for example `examples/article.md`), formats `@citationKeys` with **`refs.bib`** and your **CSL style**, inserts a **References** list when needed, and produces a **PDF** (or slides).
+
+Here are the export scripts you already tried in the [Quickstart](#quickstart):
+
+- **`export-document.sh`** for articles, notes, and long documents
+
+  - Accepts either a single `.md` file or a directory of `.md` files
+  - If given a directory, it concatenates files in **alphabetical order**
+  - Feeds the `refs.bib` to the citation engine with the `--citeproc` flag
+  - Uses the `citation-style-CMS17.csl` to format citations (to **change citation style**, swap out `citation-style-CMS17.csl` in the export scripts if you need APA, MLA, etc.)
+
+- **`export-slides.sh`** for Beamer slide decks
+
+  - Applies the `beamer` class with the `-t beamer` argument
+  - Uses `beamer-template.tex` (document skeleton) and `beamer-style.tex` (theme and macros)
+  - Follows the same citation pipeline (`--citeproc`, `refs.bib`, CSL)
+
+---
+
+*Note in the [Installation](#installation) diagram that `refs.bib` is used twice: (1) by VS Code in `.vscode/settings.json` (Pandoc Citer for autocomplete) and (2) by Pandoc itself in the export scripts (for formatting at build time).*
+
+---
+
+Markdown can also be **exported directly to HTML or PDF**, without Pandoc (for example with the VS Code extension *Markdown All in One* command `Print current document to HTML`). But this has limitations:
+
+- Pandoc’s extended Markdown features are unavailable
+- `@citationKeys` will not resolve into references
+- LaTeX commands and packages may not be processed
 
 ### Note-taking with Foam
 
