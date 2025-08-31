@@ -1,7 +1,7 @@
 ---
 title: "Why Write in Plain Text?"
-subtitle: "A case for academics based on Kieran Healy's guide^[Available at https://plain-text.co/]"
-author: "Mark Doe"
+subtitle: "A case for academics based on Kieran Healy's guide[^Healy_url]"
+author: "Your Name"
 institute: "Your Organization"
 date: "September 1, 2025"
 # find other themes and color themes at online, e.g. https://mpetroff.net/files/beamer-theme-matrix/
@@ -11,11 +11,19 @@ colortheme: "default"
 mainfont: "Helvetica Neue"
 fonttheme: "professionalfonts" # see https://www.beamer.plus/Fonts.html
 fontsize: 11pt
+colorlinks: true
+linkcolor: blue # set all link colors to blue
+urlcolor: blue # set all link colors to blue
+citecolor: blue # set all link colors to blue
+filecolor: blue # set all link colors to blue
 aspectratio: 43 # change to e.g. 169 for a 19:9 aspect ratio
 section-titles: false # set to true to give each new section its own title page
 header-includes: |
   \linespread{1.2}
 ...
+
+[^Healy_url]:
+  *The Plain Person's Guide to Plain Text Social Science* -@Healy2018:PlainPersonsGuide. Read online at [https://plain-text.co](https://plain-text.co).
 
 # Two models
 
@@ -56,31 +64,33 @@ header-includes: |
 
 - Keep a record (scripts, notes, datasets in plain text)
 - Use **version control** (Git) instead of endless “Final.docx”
-- Back up automatically (e.g. GitHub + offsite)
+- **Back up** automatically (e.g. GitHub + offsite)
 
 ### Tools of the Trade
 
 - **Text editors** (VS Code, Emacs, Sublime, etc.)  
 - **Markdown** for formatting, citations, cross-references  
-- **Pandoc** to convert Markdown to PDF/Word/HTML  
-- **R + RMarkdown / knitr** for integrated analysis & writing  
+- **Pandoc** to convert Markdown to PAF/Word/HTML  
+- **R + RMarkdown** for integrated analysis & writing  
 
 # The Takeaway
 
-- **Plain text = control over your research workflow**
+### Plain text = control over your research workflow
+
 - Scales from a single paper to an entire dissertation
 - Frees you from software lock-in
 - Makes your work reproducible for collaborators, reviewers, and your future self
 
 # Further reading
 
-### References
-
-<div id="refs"></div>
-
 ### More on Beamer + Pandoc
 
-- The Pandoc guide on slide shows with Beamer [https://pandoc.org/MANUAL.html#slide-shows](pandoc.org/MANUAL.html#slide-shows)
-- The frontmatter variables in Pandoc [pandoc.org/MANUAL.html#variables-for-beamer-slides](https://pandoc.org/MANUAL.html#variables-for-beamer-slides)
-- Beamer themes [mpetroff.net/files/beamer-theme-matrix/](https://mpetroff.net/files/beamer-theme-matrix/)
-- The Beamer manual [www.beamer.plus/home.html](https://www.beamer.plus/home.html)
+- Integrate some examples from the [cookbook](./cookbook.md) into the slides
+- About the front matter, refer to the [typesetting section](../README.md#typesetting-your-documents) of the README
+- Get familiar [Pandoc guide](https://pandoc.org/MANUAL.html#slide-shows) on slide shows with Beamer
+- Change the combination of [beamer themes and colorthemes](https://mpetroff.net/files/beamer-theme-matrix/)
+- Dive into the [official](https://ctan.org/pkg/beamer) or [unofficial](https://www.beamer.plus/home.html) manuals for the beamer class
+
+## References
+
+<div id="refs"></div>
