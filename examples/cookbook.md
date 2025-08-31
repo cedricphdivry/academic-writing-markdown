@@ -15,23 +15,25 @@ nocite: |
   @Williams1990:StyleClarityGrace
 ---
 
+\hyphenation{American} <!-- Prevents hyphenation throughout the document for the selected word. This command prevents the word "American" from being hyphenated in a caption below. -->
+
 \tableofcontents
 
 \newpage
 
 # Markdown Cookbook
 
-Heads-up about rendering:
+Heads-up about **rendering**:
 
-- **[VS Code Markdown Preview](https://code.visualstudio.com/Docs/languages/markdown#_markdown-preview)**, accessible with the command[s] `Markdown: Open Locked Preview[ to the Side]`, renders basic Markdown. It can handle some of the more advanced features with extensions, but it doesn't process citations, cross-references, LoT/LoF, and most LaTeX beyond math.
+- **[VS Code Markdown Preview](https://code.visualstudio.com/Docs/languages/markdown#_markdown-preview)**, accessible with the command `Markdown: Open Locked Preview to the Side`, renders basic Markdown. It can handle some of the more advanced features with extensions, but it doesn't process citations, cross-references, LoT/LoF, and most LaTeX beyond math.
 
 - The **Pandoc export** explained in the [README](../README.md) runs the full pipeline: citations & bibliography, cross-refs from your labels, figure/table numbering, image sizing, LoT/LoF, etc.
 
-**Recommendation**: preview the text and structure in VS Code, but trust Pandoc PDF outputs for the final output.
+I recommend previewing the text and structure in VS Code until you are comfortable with viewing source code, but always trusting the Pandoc PDF outputs for the final look.
 
 ## Basic syntax
 
-To get you started, here are some of the basic elements of Markdown which I used the most:
+The specific flavor of Markdown used is [Pandoc Markdown](https://pandoc.org/MANUAL.html). To get you started, here are some of the basic elements of Markdown, which do not require Pandoc to function:
 
 - **Headings** are introduced with one or more `#` symbols. If you look at the raw Markdown of this document, the title is written `# Thesis in Markdown` (top level heading or title), the subsection is written `## How to use` (level-2 heading) this sub-subsection is written `### Writing` (level-3 heading).
 
@@ -97,7 +99,7 @@ Table: Evolution of the nonbasic to basic ratio in selected American metropolita
 
 You can also install the [Markdown Table extension](https://marketplace.visualstudio.com/items?itemName=TakumiI.markdowntable) for some handy commands, or use the [HTML syntax for tables](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table).
 
-If you are viewing the source code or using VS Code's Markdown Preview, the reference `@citationKey` and the `label` LaTex command are visible in the Table's caption. See respectively [Referencing](#referencing-requires-pandoc) and [Cross-referencing](#cross-referencing-requires-pandoc) below.
+If you are viewing the source code or using VS Code's Markdown Preview, the reference `@citationKey` and the `label` LaTex command are visible in the Table's caption. See respectively [Referencing](#citations-requires-pandoc) and [Cross-referencing](#cross-referencing-requires-pandoc) below.
 
 ## Footnotes (requires Pandoc)
 
@@ -107,7 +109,7 @@ Footnotes are created in the body of text by inserting the `[^footnote_name]` in
 
 *In VS Code's Preview, you will not see the above paragraph as a footnote. Use the [Markdown Footnotes extension](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-footnotes) to view footnotes in the Preview.*
 
-## Referencing (requires Pandoc)
+## Citations (requires Pandoc)
 
 To **reference**, simply type `@` and part of a `@citationKey` you are looking for. The `Pandoc Citer` VS Code extension will provide autocomplete based on the contents of the `refs.bib` file, which is automatically updated by Zotero's `Better BibTex` extension.
 
@@ -115,17 +117,19 @@ The output of references is determined by the Citation Style Language (CSL) cita
 
 The formatting options for citations cover many situations:
 
-| Markdown input                                          | Output                            |
-| ------------------------------------------------------- | --------------------------------- |
-| `@Lucas1988:Mechanics`                                  | Lucas (1988)                      |
-| `[@Lucas1988:Mechanics]`                                | (Lucas 1988)                      |
-| `-@Lucas1988:Mechanics`                                 | (1988)                            |
-| `[@Lucas1988:Mechanics 41]`                             | (Lucas 1988, 41)                  |
-| `[@Lucas1988:Mechanics 41, 43]`                         | (Lucas 1988, 41, 43)              |
-| `[@Lucas1988:Mechanics 41-43]`                          | (Lucas 1988, 41-43)               |
-| `[see also @Lucas1988:Mechanics]`                       | (see also Lucas 1988)             |
-| `[@Lucas1980:MdPbBusiness; @Lucas1988:Mechanics]`       | (Lucas 1980, 1988)                |
-| `[@Lucas1988:Mechanics; @GlaeserEtAl1992:GrowthCities]` | (Lucas 1988; Glaeser et al. 1992) |
+| Markdown input                                          | Output                                                |
+| ------------------------------------------------------- | ----------------------------------------------------- |
+| `@Lucas1988:Mechanics`                                  | @Lucas1988:Mechanics                                  |
+| `[@Lucas1988:Mechanics]`                                | [@Lucas1988:Mechanics]                                |
+| `-@Lucas1988:Mechanics`                                 | -@Lucas1988:Mechanics                                 |
+| `[@Lucas1988:Mechanics 41]`                             | [@Lucas1988:Mechanics 41]                             |
+| `[@Lucas1988:Mechanics 41, 43]`                         | [@Lucas1988:Mechanics 41, 43]                         |
+| `[@Lucas1988:Mechanics 41-43]`                          | [@Lucas1988:Mechanics 41-43]                          |
+| `[see also @Lucas1988:Mechanics]`                       | [see also @Lucas1988:Mechanics]                       |
+| `[@Lucas1980:MdPbBusiness; @Lucas1988:Mechanics]`       | [@Lucas1980:MdPbBusiness; @Lucas1988:Mechanics]       |
+| `[@Lucas1988:Mechanics; @GlaeserEtAl1992:GrowthCities]` | [@Lucas1988:Mechanics; @GlaeserEtAl1992:GrowthCities] |
+
+Table: Formatting options for citations with Pandoc Citeproc
 
 ## Cross-referencing (requires Pandoc)
 
@@ -142,6 +146,8 @@ For a page-specific pointer: see **Figure \ref{couchant-lorrain}** on page \page
 
 *Tip:* To add your own cross-reference, place a `\label{my-label}` in a caption (figure/table) or right after a heading, then refer to it later with `\ref{my-label}` (or `\pageref{my-label}` for the page). In VS Code’s Preview you’ll see the raw commands, but the PDF will show the final numbers and links.
 
+\newpage
+
 ## LoT and LoF (requires Pandoc)
 
 **List of Tables (LoT)** and **List of Figures (LoF)** are generated automatically from captions. The lists appear where you place the commands `\listoftables` and `\listoffigures`[^toc].
@@ -155,6 +161,8 @@ They include any **table** that has a caption line starting with `Table:` and an
 
 \listoffigures
 
+\newpage
+
 ## Bibliography (requires Pandoc)
 
 The following bibliography is automatically generated by Pandoc, which places it at the end of your document by default. It will include the following from your `refs.bib` file:
@@ -162,8 +170,10 @@ The following bibliography is automatically generated by Pandoc, which places it
 - references cited directly in the text, like `@Ullman1953:BasicServiceRatioAreal` in the caption on Table \ref{table-metro-data}
 - references listed in the `nocite` argument of the frontmatter like `@Williams1990:StyleClarityGrace`, which are included even if they don't appear in the body of the text.
 
+The LoT, LoF, as well as the Bibliography, are all part of the **back matter** of the document.
+
 \hrulefill <!-- This LaTeX command creates a horizontal line -->
 
-<!-- The bibliography will be generated after this line, in the HTML div with id=refs. If the HTML div is absent, Pandoc will place the bibliography at the very end of the document by default -->
+<!-- The bibliography will be generated in the HTML div with id=refs. If this HTML div is absent, Pandoc will default to placing the bibliography at the very end of the document. -->
 
 <div id="refs"></div>
