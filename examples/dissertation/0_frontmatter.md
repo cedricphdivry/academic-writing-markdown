@@ -22,7 +22,7 @@ nocite: |
 ---
 
 <!-- Oftentimes your institution will provide a template for the cover page of your thesis. You can include it here as an external PDF. If you want to use the automatic title page, remove the above command and the line \AtBeginDocument{\let\maketitle\relax} in the YAML. -->
-\includepdf[pages={1}]{examples/thesis/__cover-page.pdf}
+\includepdf[pages={1}]{examples/dissertation/__cover-page.pdf}
 
 <!-- Everything between the \frontmatter command and the \mainmatter below will be numbered in small Roman numerals.-->
 \frontmatter
@@ -36,9 +36,7 @@ nocite: |
 \OnehalfSpacing
 
 \begin{abstract}
-This dummy thesis demonstrates all the moving parts of the template:
-front matter, epigraphs, math, figures, tables, cross-references,
-citations, and back matter (LoF/LoT/References).
+This dummy thesis demonstrates how to structure and typeset a long-form academic document written entirely in Markdown and exported to PDF with Pandoc. Drawing on public domain texts, it illustrates the use of front matter, chapter styles, citations, footnotes, figures, tables, cross-references, lists of figures and tables, and bibliographies. In combination with the accompanying README (setup and workflow) and the Markdown Cookbook (syntax recipes), this document shows how all the elements of the template come together in a coherent workflow.
 \end{abstract}
 
 <!-- End of frontmatter: normal page numbering from now on -->
@@ -48,7 +46,7 @@ citations, and back matter (LoF/LoT/References).
 \makeatletter
 \newcommand{\fonttitle}{\chaptitlefont}
 \makechapterstyle{customchapter}{%
-  \renewcommand*{\chapnumfont}{\normalfont\fontsize{50}{10}\selectfont\bfseries}
+  \renewcommand*{\chapnumfont}{\normalfont\fontsize{40}{10}\selectfont\bfseries}
   \def\chapterheadstart{\vspace*{\beforechapskip}}
   \def\printchaptername{}
   \def\printchapternonum{}
