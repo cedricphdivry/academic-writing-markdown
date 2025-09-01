@@ -46,8 +46,8 @@ Clone this repository and produce a sample PDF in just a few steps:
 2. **Clone this repo**:
 
     ```bash
-    git clone https://github.com/***REMOVED***/thesis-in-markdown.git
-    cd thesis-in-markdown
+    git clone https://github.com/cedricphdivry/academic-writing-markdown
+    cd academic-writing-markdown
     ```
 
 3. **Install the essentials**:
@@ -63,9 +63,9 @@ Clone this repository and produce a sample PDF in just a few steps:
      ```bash
      sh export-document.sh examples/cookbook.md
      ```
-   - Multi-file document (e.g. a thesis):
+   - Multi-file document (e.g. a dissertation):
      ```bash
-     sh export-document.sh examples/thesis
+     sh export-document.sh examples/dissertation
      ```
    - Slides:
      ```bash
@@ -76,7 +76,7 @@ Clone this repository and produce a sample PDF in just a few steps:
 
 You now have a working **plain-text → PDF pipeline**. From here you can:
 
-- Edit the sample Markdown files (`thesis/chapters/`, `examples/cookbook.md`) and re-export to see changes
+- Edit the sample Markdown files (`dissertation/chapters/`, `examples/cookbook.md`) and re-export to see changes
 - Proceed with the full [installation](#installation) to enable reference management
 - Check the [usage guide](#usage-guide) for Markdown, citations, math, diagrams, and more
 
@@ -192,7 +192,7 @@ This section walks through the essentials of working with this template:
 - [Editing Markdown files](#editing-markdown-files), by example
 - [Navigating](#navigating-in-vscode) your project with VS Code commands and keyboard shortcuts
 - [Typesetting](#typesetting-your-documents) with YAML parameters and LaTeX commands
-- [Exporting PDF files](#exporting-your-documents), from simple notes and slides to a full thesis
+- [Exporting PDF files](#exporting-your-documents), from simple notes and slides to a full dissertation
 - Managing your project with [version control](#version-control) and setting up [sync and backup](#sync-and-backup) to protect your work
 
 ### Editing Markdown files
@@ -243,7 +243,7 @@ Changing the look and feel out output documents involves intervening in those tw
 1. **Change the `documentclass`**
 
     - The **article class** is the default `documentclass` applied by Pandoc, as in [`examples/cookbook.md`](examples/cookbook.md). See the [article class documentation](https://ctan.org/pkg/article).
-    - The **memoir class** is an alternative to the `book` class for long documents. Notice in [`examples/thesis/0_frontmatter.md`](./examples/thesis/0_frontmatter.md), the `documentclass` field is set to `memoir`. See the [memoir class manual](https://ctan.org/pkg/memoir).
+    - The **memoir class** is an alternative to the `book` class for long documents. Notice in [`examples/dissertation/0_frontmatter.md`](./examples/dissertation/0_frontmatter.md), the `documentclass` field is set to `memoir`. See the [memoir class manual](https://ctan.org/pkg/memoir).
     - The **beamer class** is used to produce slide decks. Rather than being specified in [`examples/slides.md`](./examples/slides.md), the class is applied in the [`export-slides.sh`](export-slides.sh) script. See the beamer [reading list](./examples/slides.md#further-reading) in the slides.
 
 2. **Modify the frontmatter**
@@ -254,8 +254,8 @@ Changing the look and feel out output documents involves intervening in those tw
 3. **Apply LaTeX commands**
 
     - LaTeX commands throughout the body of the Markdown document may control typesetting, page layout, etc.
-    - See [`examples/thesis/0_frontmatter.md`](./examples/thesis/0_frontmatter.md) for an example
-    - Note that Pandoc cannot translate Markdown syntax and citation keys within LaTeX commands. See the beginning [`examples/thesis/1_chapter1.md`](examples/thesis/1_chapter1.md).
+    - See [`examples/dissertation/0_frontmatter.md`](./examples/dissertation/0_frontmatter.md) for an example
+    - Note that Pandoc cannot translate Markdown syntax and citation keys within LaTeX commands. See the beginning [`examples/dissertation/1_chapter1.md`](examples/dissertation/1_chapter1.md).
   
 ### Exporting your documents
 
@@ -332,5 +332,5 @@ There are **two complementary protections**:
 If you only do the basics, I recommend combining these three measures:
 
 1. Turn on Zotero sync (keeps your references and PDFs safe).
-2. Use GitHub (private repo) or Dropbox to sync your thesis project folder.
+2. Use GitHub (private repo) or Dropbox to sync your dissertation project folder.
 3. Run Time Machine (macOS) or an equivalent backup tool so you can restore your system to any previous state.
